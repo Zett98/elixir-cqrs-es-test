@@ -40,6 +40,16 @@ This will start the web server on localhost, port 4000: [http://0.0.0.0:4000](ht
 
 This application _only_ includes the API back-end, serving JSON requests.
 
+## Running the tests
+
+```console
+MIX_ENV=test mix event_store.create
+MIX_ENV=test mix event_store.init
+MIX_ENV=test mix ecto.create
+MIX_ENV=test mix ecto.migrate
+mix test
+```
+
 ### building release with docker
 
 1. edit config/docker.env to suit you needs
