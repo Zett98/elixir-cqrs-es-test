@@ -40,14 +40,6 @@ This will start the web server on localhost, port 4000: [http://0.0.0.0:4000](ht
 
 This application _only_ includes the API back-end, serving JSON requests.
 
-To start your Phoenix server:
-
-- Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
-- Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
 ### building release with docker
 
 1. edit config/docker.env to suit you needs
