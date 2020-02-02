@@ -25,3 +25,5 @@ config :bank_api, BankApi.EventStore,
   database: System.get_env("EVENTSTORE_NAME"),
   hostname: System.get_env("EVENTSTORE_HOST"),
   pool_size: 15
+
+config :logger, level: :info
