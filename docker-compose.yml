@@ -1,0 +1,52 @@
+version: "3.5"
+
+services:
+  server:
+    image: nginx:1.17.8-alpine
+    container_name: nginx-server
+    ports:
+      - "80:80"
+    env_file:
+      - "config/docker.env"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - api
+    networks:
+      - nginx-network
+  bank_api-db:
+    image: postgres:12.1-alpine
+    container_name: bank_api_db
+    environment:
+      - POSTGRES_DB=bank_api_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - nginx-network
+  bank_api-eventstore:
+    image: postgres:12.1-alpine
+    container_name: bank_api-eventstore
+    environment:
+      - POSTGRES_DB=bank_api-eventstore
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - nginx-network
+    depends_on:
+      - bank_api-db
+  api:
+    image: "bank_api:latest"
+    container_name: bank_api
+    command: sh -c " /opt/app/bin/bank_api seed && /opt/app/bin/bank_api eventstore && /opt/app/bin/bank_api foreground"
+    env_file:
+      - "config/docker.env"
+    expose:
+      - "4000"
+    networks:
+      - nginx-network
+    depends_on:
+      - bank_api-db
+      - bank_api-eventstore
+networks:
+  nginx-network:
+    driver: bridge
