@@ -90,7 +90,7 @@ returns an account with matching uuid
 
 closes account with matching uuid
 
-#### POST /api/accounts/<account-uuid>/deposit
+#### POST /api/accounts/:account-uuid/deposit
 
 ```json
 {
