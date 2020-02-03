@@ -53,8 +53,14 @@ mix test
 ### building release with docker
 
 1. edit config/docker.env to suit you needs
-2. make build
-3. docker-compose up
+2. 
+```console 
+make build
+```
+3.
+```console 
+docker-compose up
+```
 
 #### testing locally?
 
